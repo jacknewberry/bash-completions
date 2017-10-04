@@ -12,7 +12,7 @@ _fly_login()
     prev_word="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Ask pss to generate a list of types it supports
-    completion_list="abc abcd abcz abcdefg zumba" #`fly_login --get-completions`
+    completion_list=`fly_login --get-completions`
 
     # Only perform completion if the current word starts with a dash ('-'),
     # meaning that the user is trying to complete an option.
@@ -23,7 +23,7 @@ _fly_login()
     #     #COMPREPLY=()
     # fi
 
-    # Only show completions is this is the first argument
+    # Show completions only if this is the first argument
     if [[ ${prev_word} == "fly_login" ]] ; then
         # COMPREPLY is the array of possible completions, generated with
         # the compgen builtin.
