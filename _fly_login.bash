@@ -1,4 +1,8 @@
 
+# To use this completion script, it must be discoverable by bash
+# Add the following line to ~/.bash_it/custom/custom.completion.bash:
+# source ~/workspace/bash-completions/_fly_login.bash
+
 _fly_login()
 {
     local cur_word prev_word type_list
