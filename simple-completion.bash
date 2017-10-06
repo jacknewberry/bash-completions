@@ -11,8 +11,15 @@
 # if you need to hard-code the completion options:
 # source ~/workspace/bash-completions/simple-completion.bash "my_script" "echo one two three four"
 
-target_cmd=$1
-get_completions_cmd=$2
+#eval "someprefix_${bname}() { echo test; }"
+
+#target_cmd=$1
+#get_completions_cmd=$2
+
+eval "_target_cmd_${1}=$1"
+eval "_get_completions_${$2}=$2"
+
+echo "Setting simple completions for:" _target_cmd_${1} "    with:" _get_completions_${$2}
 
 _docompletion()
 {
@@ -24,19 +31,19 @@ _docompletion()
     prev_word="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Generate a list of completion options
-    completion_list=`$get_completions_cmd`
+    completion_list=`"_get_completions_${$2}=$2"`
 
     # Show completions only if this is the first argument
-    if [[ ${prev_word} == "$target_cmd" ]] ; then
+    #if [[ ${prev_word} == "_target_cmd_${1}" ]] ; then
         # COMPREPLY is the array of possible completions, generated with
         # the compgen builtin.
-        COMPREPLY=( $(compgen -W "${completion_list}" -- ${cur_word}) )
-    else
-        COMPREPLY=()
-    fi
+    COMPREPLY=( $(compgen -W "${completion_list}" -- ${cur_word}) )
+    #else
+    #    COMPREPLY=()
+    #fi
 
     return 0
 }
 
 # Register this completion function for the appropriate command(s)
-complete -F _docompletion ${target_cmd}
+complete -F _docompletion $1

@@ -13,7 +13,9 @@
 target_cmd=$1
 get_completions_cmd=$2
 
-_docompletion()
+echo "Setting layered completion for:" $target_cmd "     with:" $get_completions_cmd
+
+_dolcompletion()
 {
     local cur_word prev_word type_list
 
@@ -52,4 +54,4 @@ _docompletion()
 }
 
 # Register this completion function for the appropriate command(s)
-complete -F _docompletion ${target_cmd}
+complete -F _dolcompletion $target_cmd
