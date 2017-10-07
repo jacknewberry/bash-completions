@@ -10,8 +10,8 @@
 #   filename completion is not yet supported.
 # TODO: accept filename completion
 
-target_cmd=$1
-get_completions_cmd=$2
+target_cmd="$1"
+get_completions_cmd="$2"
 
 echo "Setting layered completion for:" $target_cmd "     with:" $get_completions_cmd
 

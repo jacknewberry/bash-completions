@@ -21,7 +21,7 @@ eval "_get_completions_${$2}=$2"
 
 echo "Setting simple completions for:" _target_cmd_${1} "    with:" _get_completions_${$2}
 
-_docompletion()
+function _docompletion
 {
     local cur_word prev_word type_list
 
