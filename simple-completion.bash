@@ -17,21 +17,28 @@
 #get_completions_cmd=$2
 
 eval "_target_cmd_${1}=$1"
-eval "_get_completions_${$2}=$2"
+eval "_get_completions_${1}='$2'"
 
-echo "Setting simple completions for:" _target_cmd_${1} "    with:" _get_completions_${$2}
+echo "Setting simple completions for:" _target_cmd_${1} "    with:" _get_completions_${1}
 
 function _docompletion
 {
-    local cur_word prev_word type_list
+    # When the function or command is invoked:
+    # the first argument ($1) is the name of the command which is being completed,
+    # the second argument ($2) is the word being completed,
+    # and the third argument ($3) is the word preceding.
+
+    #echo "_target_cmd_${1}"
+    local cur_word prev_word completion_list
 
     # COMP_WORDS is an array of words in the current command line.
     # COMP_CWORD is the index of the current word.
-    cur_word="${COMP_WORDS[COMP_CWORD]}"
-    prev_word="${COMP_WORDS[COMP_CWORD-1]}"
+    cur_word=$2  #"${COMP_WORDS[COMP_CWORD]}" # I don't know why everyone doesn't do this.
+    prev_word=$3 #"${COMP_WORDS[COMP_CWORD-1]}"
 
     # Generate a list of completion options
-    completion_list=`"_get_completions_${$2}=$2"`
+    compCmdName=_get_completions_${1}
+    completion_list=`${!compCmdName}`
 
     # Show completions only if this is the first argument
     #if [[ ${prev_word} == "_target_cmd_${1}" ]] ; then
