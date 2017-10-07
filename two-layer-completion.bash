@@ -10,19 +10,16 @@
 #   filename completion is not yet supported.
 # TODO: accept filename completion
 
-target_cmd="$1"
-get_completions_cmd="$2"
+eval "_complete_${1}='$2'"
 
-echo "Setting layered completion for:" $target_cmd "     with:" $get_completions_cmd
-
-_dolcompletion()
+function _dolcompletion
 {
-    local cur_word prev_word type_list
+    local cur_word prev_word completion_list
 
     # COMP_WORDS is an array of words in the current command line.
     # COMP_CWORD is the index of the current word.
-    cur_word="${COMP_WORDS[COMP_CWORD]}"
-    prev_word="${COMP_WORDS[COMP_CWORD-1]}"
+    cur_word=$2 #"${COMP_WORDS[COMP_CWORD]}"
+    prev_word=$3 #"${COMP_WORDS[COMP_CWORD-1]}"
 
     # # Generate a list of completion options
     # completion_list=`$get_completions_cmd 1`
@@ -47,11 +44,12 @@ _dolcompletion()
     # return 0
 
     # Generate a list of completion options depending on the level of argument
-    completion_list=`$get_completions_cmd $COMP_CWORD $prev_word`
+    compCmdName=_complete_${1}
+    completion_list=$(${!compCmdName} $COMP_CWORD $prev_word)
     COMPREPLY=( $(compgen -W "${completion_list}" -- ${cur_word}) )
 
     return 0 # not sure if this is important.
 }
 
 # Register this completion function for the appropriate command(s)
-complete -F _dolcompletion $target_cmd
+complete -F _dolcompletion $1

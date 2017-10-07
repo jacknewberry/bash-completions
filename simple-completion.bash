@@ -11,15 +11,9 @@
 # if you need to hard-code the completion options:
 # source ~/workspace/bash-completions/simple-completion.bash "my_script" "echo one two three four"
 
-#eval "someprefix_${bname}() { echo test; }"
+eval "_complete_${1}='$2'"
 
-#target_cmd=$1
-#get_completions_cmd=$2
-
-eval "_target_cmd_${1}=$1"
-eval "_get_completions_${1}='$2'"
-
-echo "Setting simple completions for:" _target_cmd_${1} "    with:" _get_completions_${1}
+echo "Setting simple completions for:" ${1} "    with:" ${2}
 
 function _docompletion
 {
@@ -37,7 +31,7 @@ function _docompletion
     prev_word=$3 #"${COMP_WORDS[COMP_CWORD-1]}"
 
     # Generate a list of completion options
-    compCmdName=_get_completions_${1}
+    compCmdName=_complete_${1}
     completion_list=`${!compCmdName}`
 
     # Show completions only if this is the first argument

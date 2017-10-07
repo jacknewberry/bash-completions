@@ -6,22 +6,21 @@ layer=$1
 prev_word=$2
 
 case ${layer} in
-  "0"*)
+  "1"*)
     echo "aws gcp"
     exit
     ;;
-  "1"*)
+  "2"*)
     if [[ ${prev_word} == "aws" ]] ; then
-      echo " "
+      echo "anAWScf anotherAWSFoundry"
       exit
     elif [[ ${prev_word} == "gcp" ]] ; then
       echo "londyhop locomotion lambada flamenco bolero pikachu reel charlston samba sousta"
       exit
     else
-      echo "case_1_no_prev_word oh_no"
+      echo "COMPLETION_ERROR_case_2_no_known_prev_word"
     fi
     ;;
   *)
-    echo "first_arg_was_not_1_nor_0"
   ;;
 esac
