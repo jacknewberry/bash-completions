@@ -13,9 +13,7 @@
 
 eval "_complete_${1}='$2'"
 
-echo "Setting simple completions for:" ${1} "    with:" ${2}
-
-function _docompletion
+function _simple_completion
 {
     # When the function or command is invoked:
     # the first argument ($1) is the name of the command which is being completed,
@@ -47,4 +45,4 @@ function _docompletion
 }
 
 # Register this completion function for the appropriate command(s)
-complete -F _docompletion $1
+complete -F _simple_completion $1

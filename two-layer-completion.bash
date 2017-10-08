@@ -10,9 +10,11 @@
 #   filename completion is not yet supported.
 # TODO: accept filename completion
 
+# This line stores the completion command so it can be retrieved by _layered_completion.
 eval "_complete_${1}='$2'"
 
-function _dolcompletion
+
+function _layered_completion
 {
     local cur_word prev_word completion_list
 
@@ -46,10 +48,15 @@ function _dolcompletion
     # Generate a list of completion options depending on the level of argument
     compCmdName=_complete_${1}
     completion_list=$(${!compCmdName} $COMP_CWORD $prev_word)
-    COMPREPLY=( $(compgen -W "${completion_list}" -- ${cur_word}) )
+    if [[ ${completion_list} = "_-f" ]]; then
+      COMPREPLY=( $(compgen -o filenames -A file -- ${cur_word}) )
+      #COMPREPLY=( $(compgen -W "${completion_list}" -- ${cur_word}) )
+    else
+      COMPREPLY=( $(compgen -W "${completion_list}" -- ${cur_word}) )
+    fi
 
     return 0 # not sure if this is important.
 }
 
 # Register this completion function for the appropriate command(s)
-complete -F _dolcompletion $1
+complete -F _layered_completion completion $1
