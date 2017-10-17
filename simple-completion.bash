@@ -33,13 +33,12 @@ function _simple_completion
     completion_list=`${!compCmdName}`
 
     # Show completions only if this is the first argument
-    #if [[ ${prev_word} == "_target_cmd_${1}" ]] ; then
-        # COMPREPLY is the array of possible completions, generated with
-        # the compgen builtin.
-    COMPREPLY=( $(compgen -W "${completion_list}" -- ${cur_word}) )
-    #else
-    #    COMPREPLY=()
-    #fi
+    if [[ ${prev_word} == ${1} ]] ; then
+        # COMPREPLY is the array of possible completions, generated with the compgen builtin.
+        COMPREPLY=( $(compgen -W "${completion_list}" -- ${cur_word}) )
+    else
+        COMPREPLY=()
+    fi
 
     return 0
 }
