@@ -12,13 +12,15 @@ case ${layer} in
     ;;
   "2"*)
     if [[ ${prev_word} == "aws" ]] ; then
-      echo _-f #"oneAWScf anotherAWSFoundry"
+      echo "cupcake swissroll victoriasponge"
       exit
     elif [[ ${prev_word} == "gcp" ]] ; then
-      echo "londyhop locomotion lambada flamenco bolero pikachu reel charlston samba sousta"
+      # This list was retrieved via " list-envs | awk '/gcp/ {printf "%s ", $1}' " on October 18th 2017
+      options="ekitaguriro dhalo arkan bellydance chickendance kabuki lambada pikachu polka flamenco indlamu jig kathak macarena manipuri moonwalk moresca odissi sirtaki sousta plumber-testing plumbers-testing-1234 hullygully robot sattriya rumba giga mambo tango frevo tarantella zumba kiev rotterdam munich oradea porto toulouse bern innsbruck leeds minsk turin sofia liverpool nassau anakin obi-wan rey"
+      echo $options
       exit
     else
-      echo "COMPLETION_ERROR_case_2_no_known_prev_word"
+      #echo "COMPLETION_ERROR_Previous_word_not_recognised"
       exit
     fi
     ;;

@@ -1,5 +1,8 @@
 # This file is sourced into ~/.bash_it/custom/custom.completion.bash on some workstations.
 
-# source ~/workspace/bash-completions/_fly_login.bash
+# Working:
 source ~/workspace/bash-completions/simple-completion.bash "fly_login" "fly_login --get-completions"
-#source ~/workspace/bash-completions/two-layer-completion.bash "cf_login" "~/workspace/bash-completions/_cf_login.bash"
+
+# In development:
+
+source ~/workspace/bash-completions/two-layer-completion.bash "cf_login" "$HOME/workspace/bash-completions/_cf_login.bash"
