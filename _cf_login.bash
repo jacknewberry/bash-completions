@@ -15,8 +15,8 @@ case ${layer} in
       echo "cupcake swissroll victoriasponge"
       exit
     elif [[ ${prev_word} == "gcp" ]] ; then
-      # This list was retrieved via " list-envs | awk '/gcp/ {printf "%s ", $1}' " on December 8th 2017, after the great Whisky fire.
-      options="southlaketahoe amadorcity clayton colfax lapuente palmdesert redlands kingcity murrieta havana missionviejo coachella hughson"
+      # This list was retrieved via " list-envs names | awk '{printf "%s ", $1}' " on January 11th 2018.
+      options="elcerrito monaco kingcity murrieta southlaketahoe amadorcity havana missionviejo clayton lapuente palosverdesestates colfax coachella hughson walnutcreek ranchomirage biggs bradbury huron luxembourg palmdesert redlands"
       echo $options
       exit
     else
