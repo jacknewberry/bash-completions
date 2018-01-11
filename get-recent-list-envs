@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# return a cached list of redis environment names, for bash completion.
+# this needs to be instantaneous for command-line completion
+
+this_dir="$(dirname "$0")/"
+
+if [[ ! -f ~/.recent-list-envs]]; then
+  list-envs names > ~/.recent-list-envs
+fi
+
+cat ~/.recent-list-envs
